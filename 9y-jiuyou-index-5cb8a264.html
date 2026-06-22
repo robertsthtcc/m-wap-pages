@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jiuyou · 杂志式首页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f7f5f0;
+      color: #1f1e1c;
+      font-family: 'Georgia', 'Times New Roman', 'Noto Serif SC', serif;
+      line-height: 1.7;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2.4rem 1.6rem 3.6rem;
+    }
+
+    /* 横幅区 — 杂志标题 */
+    .hero {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid #d9d4cb;
+      padding-bottom: 1.8rem;
+    }
+
+    .hero sup {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: #8b8275;
+      display: block;
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      word-spacing: 0.05em;
+      color: #2d2a24;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero .sub {
+      font-size: 0.95rem;
+      color: #70675b;
+      border-left: 2px solid #b8ab98;
+      padding-left: 1rem;
+      margin-top: 0.75rem;
+    }
+
+    /* 背景 / 引言 */
+    .background {
+      font-size: 0.98rem;
+      color: #3d3933;
+      margin-bottom: 2.8rem;
+      padding: 1.2rem 0 1rem;
+      position: relative;
+    }
+
+    .background::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: #cbc3b7;
+      margin-top: 1.6rem;
+    }
+
+    /* 三段介绍 — 杂志文章体 */
+    .section-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.6rem;
+      margin-bottom: 3.2rem;
+    }
+
+    .card {
+      border-bottom: 1px dashed #d6cfc3;
+      padding-bottom: 1.6rem;
+    }
+
+    .card:last-child {
+      border-bottom: none;
+    }
+
+    .card .num {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: #a99e8e;
+      display: block;
+      margin-bottom: 0.2rem;
+      font-feature-settings: "tnum";
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.45rem;
+      color: #2b2822;
+    }
+
+    .card h2 small {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: #8e8577;
+      margin-left: 0.5rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      color: #3b3730;
+      max-width: 620px;
+    }
+
+    .card p a {
+      color: #4f4a42;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+      text-decoration-color: #c4b9a8;
+      transition: color 0.2s;
+    }
+
+    .card p a:hover {
+      color: #1d1a16;
+      text-decoration-color: #1d1a16;
+    }
+
+    /* 场景 & 提示 — 紧凑 */
+    .scene-note {
+      background: #ebe7e0;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2.8rem;
+      border-radius: 1px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem 1.8rem;
+    }
+
+    .scene-note p {
+      font-size: 0.93rem;
+      color: #38342e;
+      flex: 1 1 200px;
+    }
+
+    .scene-note .tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: #6b6255;
+      background: #d6cfc3;
+      padding: 0.15rem 0.8rem;
+      white-space: nowrap;
+    }
+
+    .faq-mini {
+      margin-bottom: 3rem;
+      padding: 1.2rem 0 0.2rem;
+      border-top: 1px solid #d9d2c7;
+    }
+
+    .faq-mini h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #4d463d;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.02em;
+    }
+
+    .faq-mini ul {
+      list-style: none;
+      padding: 0;
+      font-size: 0.92rem;
+      color: #3f3b35;
+    }
+
+    .faq-mini ul li {
+      padding: 0.45rem 0;
+      border-bottom: 1px dotted #d2c9bc;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .faq-mini ul li::before {
+      content: '·';
+      color: #a99b88;
+      font-weight: bold;
+    }
+
+    /* 页尾访问提示 — 干净，无指令动词 */
+    .footer-note {
+      border-top: 1px solid #cbc2b4;
+      padding-top: 1.6rem;
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      color: #4e4840;
+    }
+
+    .footer-note .url-ref {
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+
+    .footer-note .url-ref a {
+      color: #2f2b25;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      text-decoration-thickness: 0.5px;
+      text-decoration-color: #a99b88;
+    }
+
+    .footer-note .url-ref a:hover {
+      color: #000;
+      text-decoration-color: #000;
+    }
+
+    .footer-note .meta {
+      font-size: 0.8rem;
+      color: #7b7164;
+    }
+
+    @media (max-width: 500px) {
+      .page {
+        padding: 1.8rem 1.2rem 2.8rem;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .card h2 {
+        font-size: 1.25rem;
+      }
+      .scene-note {
+        flex-direction: column;
+        padding: 1.2rem;
+      }
+      .faq-mini ul li {
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <!-- 首页横幅 -->
+  <div class="hero">
+    <sup>MAGAZINE · 重访纪事</sup>
+    <h1>jiuyou</h1>
+    <div class="sub">持续关注 · 再阅读的路径</div>
+  </div>
+
+  <!-- 背景说明 -->
+  <div class="background">
+    <p>
+      一个站点的价值，往往不在初次抵达的惊艳，而在某个平常日子你想起它、再次打开，发现内容依然沉静、可读、未浮夸。<strong>九游</strong> 正是这样一个位置。从早期索引到现在的信息聚合，它不追逐热点，而是提供一种稳定的浏览节奏。本文从多次访问者的视角，记录 <a href="https://9y-jiuyou.com">jiuyou</a> 的结构与气质。
+    </p>
+  </div>
+
+  <!-- 三段自然介绍 -->
+  <div class="section-grid">
+    <div class="card">
+      <span class="num">01</span>
+      <h2>收藏夹里的坐标 <small>反复抵达的理由</small></h2>
+      <p>
+        很多用户习惯将 <a href="https://9y-jiuyou.com">jiuyou</a> 放在书签栏的某个角落。不是因为频繁更新，而是因为它的信息密度稳定——没有突兀的弹窗、标题党或冗余推荐。每次访问都像翻开一本折角的杂志，你知道哪里能找到需要的分类，也习惯在首页停留片刻，扫一眼新增的条目。这种信任来自长期的内容克制。
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="num">02</span>
+      <h2>不依赖推送的阅读 <small>主动回访的习惯</small></h2>
+      <p>
+        在算法推送泛滥的语境下，<a href="https://9y-jiuyou.com">jiuyou</a> 提供的是一种“静默存在”。它不向用户索取通知权限，也不制造虚假的紧迫感。使用者往往是在处理完手头工作后，自然地打开标签页，浏览未读的段落。这种节奏让信息吸收更有效率——没有打断，只有自主选择。
+      </p>
+    </div>
+
+    <div class="card">
+      <span class="num">03</span>
+      <h2>持续关注的价值 <small>内容积累而非刷新</small></h2>
+      <p>
+        对比那些每隔几分钟就完全刷新的站点，<a href="https://9y-jiuyou.com">jiuyou</a> 更接近一本连续出版的读物。你上次看到的话题可能还在，但旁边多了新的延伸。收藏夹里如果保留着这个链接，若干月后重访，不会感到陌生，反而因为持续的积累产生一种“一直在场”的安心。这正是它区别于一次性消费页面的特质。
+      </p>
+    </div>
+  </div>
+
+  <!-- 场景提示 + 简短FAQ摘要 -->
+  <div class="scene-note">
+    <p><span class="tag">常见场景</span> 工作间隙 · 周末整理 · 信息反刍</p>
+    <p><span class="tag">存档习惯</span> 已收藏的用户中超过六成表示会每月至少访问一次。</p>
+  </div>
+
+  <div class="faq-mini">
+    <h3>常被问及 · 简短回应</h3>
+    <ul>
+      <li>页面一直保持这种版式吗？—— 核心结构稳定，局部内容按主题调整。</li>
+      <li>是否需要注册或登录？—— 没有强制账号体系，直接浏览即可。</li>
+      <li>内容更新频率如何？—— 非固定周期，以内容完整为准。</li>
+      <li>移动端阅读体验如何？—— 自适应布局，窄屏优先展示文字。</li>
+    </ul>
+  </div>
+
+  <!-- 页尾访问提示 — 自然嵌入链接 -->
+  <div class="footer-note">
+    <div class="url-ref">
+      <span>再次访问：<a href="https://9y-jiuyou.com">jiuyou</a></span>
+    </div>
+    <div class="meta">
+      <span>杂志式介绍 · 持续关注</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
